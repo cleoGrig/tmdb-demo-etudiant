@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded",function(){
         }
 
         retourRequetteDernierFilm(e){
-            console.log("retour dernier film");
+            //console.log("retour dernier film");
 
             let target = e.currentTarget;
             let data;
@@ -39,10 +39,23 @@ document.addEventListener("DOMContentLoaded",function(){
         }
 
         afficheDernierFilm(data){
-            console.log("affiche dernier film");
+            //console.log("affiche dernier film");
 
-            for (let i = 0; i < data.length; i++) {
-                console.log(data[i].title);
+            for (let i = 0; i < this.totalFilm; i++) {
+                //console.log(data[i].title);
+
+                let unArticle = document.querySelector(".template>article.film").cloneNode(true);
+
+                unArticle.querySelector("h2").innerHTML = data[i].title;
+
+                unArticle.querySelector("p").innerHTML = data[i].overview || "Pas de description disponible";
+
+                let src = this.imgPath + "w185" + data[i].poster_path;
+                unArticle.querySelector("img").src = src;
+                unArticle.querySelector("img").alt = "poster de " + data[i].title;
+
+
+                document.querySelector(".liste-films").appendChild(unArticle);
             }
         }
     }
